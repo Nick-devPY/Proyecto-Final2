@@ -1,0 +1,78 @@
+{% extends "principal/base.html" %}
+{% load static %}
+{% block contenido %}
+<!-- Page Title -->
+<div class="page-title dark-background">
+  <div class="container d-lg-flex justify-content-between align-items-center">
+    <h1 class="mb-2 mb-lg-0">Editar Posteo</h1>
+    <nav class="breadcrumbs">
+      <ol>
+        <li><a href="{% url 'inicio' %}">Inicio</a></li>
+        <li><a href="{% url 'listar_posteos' %}">Administrar posteos</a></li>
+        <li class="current">Editar Posteo</li>
+      </ol>
+    </nav>
+  </div>
+</div><!-- End Page Title -->
+
+<!-- Edit Post Form Section -->
+<section class="starter-section section">
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Formulario de edición</h2>
+  </div>
+
+  <div class="container" data-aos="fade-up">
+    <div class="d-flex justify-content-center">
+      <div class="col-lg-7">
+        <form action="." method="post" enctype="multipart/form-data" data-aos="fade-up" data-aos-delay="200">
+          {% csrf_token %}
+          <div class="row gy-4">
+
+            <div class="col-md-12">
+              <label for="titulo-field" class="pb-2">Título</label>
+              <input type="text" id="titulo-field" name="titulo" class="form-control" required value="{{ posteo.titulo }}">
+            </div>
+
+            <div class="col-md-12">
+              <label for="descripcion-field" class="pb-2">Descripción</label>
+              <textarea name="descripcion" id="descripcion-field" rows="5" class="form-control" required>{{ posteo.descripcion }}</textarea>
+            </div>
+
+            <div class="col-md-12">
+              <label for="categoria-field" class="pb-2">Categoría</label>
+              <select name="categoria" id="categoria-field" class="form-control">
+                <option value="web" {% if posteo.categoria == 'web' %}selected{% endif %}>Web</option>
+                <option value="django" {% if posteo.categoria == 'django' %}selected{% endif %}>Django</option>
+                <option value="backend" {% if posteo.categoria == 'backend' %}selected{% endif %}>Backend</option>
+              </select>
+            </div>
+
+            <div class="col-md-12">
+              <label for="imagenes-field" class="pb-2">Seleccionar Nuevas Imágenes (opcional)</label>
+              <input type="file" name="imagenes" id="imagenes-field" class="form-control" multiple>
+              {% if posteo.imagenes %}
+              <small class="form-text text-muted">Imágenes actuales:</small>
+              <ul class="mt-2">
+                {% for img in posteo.imagenes %}
+                  <li><a href="{{ img }}" target="_blank">{{ img }}</a></li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+
+            <div class="col-md-12">
+              <label for="fecha-field" class="pb-2">Fecha</label>
+              <input type="date" name="fecha" id="fecha-field" class="form-control" value="{{ posteo.fecha }}">
+            </div>
+
+            <div class="col-md-12 text-center">
+              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

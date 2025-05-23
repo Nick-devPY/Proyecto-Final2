@@ -1,0 +1,20 @@
+{% extends "principal/base.html" %}
+{% block contenido %}
+<div class="container mt-4">
+  <h2 class="mb-4">Posteos existentes</h2>
+  {% for post in posteos %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ post.titulo }}</h5>
+        <p class="card-text">{{ post.descripcion }}</p>
+        <p><strong>Categoría:</strong> {{ post.categoria }}</p>
+        <p><strong>Fecha:</strong> {{ post.fecha }}</p>
+        <a href="{% url 'editar_posteo' post.id %}" class="btn btn-warning btn-sm">Editar</a>
+        <a href="{% url 'eliminar_posteo' post.id %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este posteo?')">Eliminar</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>No hay posteos cargados.</p>
+  {% endfor %}
+</div>
+{% endblock %}

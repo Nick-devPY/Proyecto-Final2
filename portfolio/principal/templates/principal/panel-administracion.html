@@ -1,0 +1,79 @@
+{% extends "principal/base.html" %}
+{% load static %}
+{% block contenido%}
+    <!-- Page Title -->
+    <div class="page-title dark-background">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Panel de administración</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{% url 'inicio' %}">Inicio</a></li>
+            <li class="current">Panel de administración</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Panel de administración Section -->
+    <section id="starter-section" class="starter-section section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Formulario para nuevos posteos</h2>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up">
+        <div class="d-flex justify-content-center">
+          <div class="col-lg-7">
+            <form action="." method="post" enctype="multipart/form-data" data-aos="fade-up" data-aos-delay="200">
+              {% csrf_token %}
+              <div class="row gy-4">
+
+                <div class="text-center mb-4">
+                  <a href="{% url 'listar_posteos' %}" class="btn btn-secondary">Administrar posteos existentes</a>
+                </div>
+        
+                <div class="col-md-12">
+                  <label for="titulo-field" class="pb-2">Título</label>
+                  <input type="text" id="titulo-field" name="titulo" class="form-control" required>
+                </div>
+        
+                <div class="col-md-12">
+                  <label for="descripcion-field" class="pb-2">Descripción</label>
+                  <textarea name="descripcion" id="descripcion-field" rows="5" class="form-control" required></textarea>
+                </div>
+        
+                <div class="col-md-12">
+                  <label for="categoria-field" class="pb-2">Categoría</label>
+                  <select name="categoria" id="categoria-field" class="form-control">
+                    <option value="web">Web</option>
+                    <option value="django">Django</option>
+                    <option value="backend">Backend</option>
+                  </select>
+                </div>
+        
+                <div class="col-md-12">
+                  <label for="imagenes-field" class="pb-2">Seleccionar Archivos</label>
+                  <input type="file" name="imagenes" id="imagenes-field" class="form-control" multiple>
+                </div>
+        
+                <div class="col-md-12">
+                  <label for="fecha-field" class="pb-2">Fecha</label>
+                  <input type="date" name="fecha" id="fecha-field" class="form-control">
+                </div>
+        
+                <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+        
+              </div>
+            </form>
+          </div>
+        </div>
+          </form>
+        </div>
+        
+      </div>
+
+    </section><!-- /Panel de administración Section -->
+   {% endblock contenido%}
